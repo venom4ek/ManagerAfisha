@@ -2,26 +2,40 @@ package ru.netology.manager;
 
 import lombok.Data;
 import ru.netology.domain.PurchaseItem;
+import ru.netology.layers.PosterRepository;
 
 @Data
 public class PosterManager {
-    private PurchaseItem[] items = new PurchaseItem[0];
+    private PosterRepository repository;
     private int defaultLength = 10;
     private int lenCustom = 0;
 
-    public PosterManager() {
+    public PosterManager(PosterRepository repository) {
+        this.repository = repository;
     }
 
     public void add(PurchaseItem item) {
-        int length = items.length + 1;
-        PurchaseItem[] tmp = new PurchaseItem[length];
-        System.arraycopy(items, 0, tmp, 0, items.length);
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
-        items = tmp;
+        repository.add(item);
+    }
+
+    public void removeById(int id) {
+        repository.removeById(id);
+    }
+
+    public void findAll() {
+        repository.findAll();
+    }
+
+    public void findById(int id) {
+        repository.findById(id);
+    }
+
+    public void removeAll() {
+        repository.removeAll();
     }
 
     public int setLen() {
+        PurchaseItem[] items = repository.findAll();
         int len = defaultLength;
         if (lenCustom == 0 || lenCustom > items.length) {
             if (len > items.length) {
@@ -34,6 +48,7 @@ public class PosterManager {
     }
 
     public PurchaseItem[] getFilm() {
+        PurchaseItem[] items = repository.findAll();
         PurchaseItem[] result = new PurchaseItem[setLen()];
         for (int i = 0; i < setLen(); i++) {
             int index = items.length - i - 1;
@@ -41,5 +56,4 @@ public class PosterManager {
         }
         return result;
     }
-
 }
