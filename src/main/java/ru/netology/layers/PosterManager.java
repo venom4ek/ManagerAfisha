@@ -20,12 +20,11 @@ public class PosterManager {
     private int defaultLength = 10;
     private int lenCustom = 0;
 
-    public int setLen() {
-        PurchaseItem[] items = repository.findAll();
+    public int setLen(int itemsSize) {
         int len = defaultLength;
-        if (lenCustom == 0 || lenCustom > items.length) {
-            if (len > items.length) {
-                len = items.length;
+        if (lenCustom == 0 || lenCustom > itemsSize) {
+            if (len > itemsSize) {
+                len = itemsSize;
             }
             return len;
         }
@@ -35,8 +34,9 @@ public class PosterManager {
 
     public PurchaseItem[] getFilm() {
         PurchaseItem[] items = repository.findAll();
-        PurchaseItem[] result = new PurchaseItem[setLen()];
-        for (int i = 0; i < setLen(); i++) {
+        int resultSize = setLen(items.length);
+        PurchaseItem[] result = new PurchaseItem[resultSize];
+        for (int i = 0; i < resultSize; i++) {
             int index = items.length - i - 1;
             result[i] = items[index];
         }

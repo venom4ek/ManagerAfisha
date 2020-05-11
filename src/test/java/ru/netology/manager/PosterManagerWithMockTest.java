@@ -1,22 +1,28 @@
 package ru.netology.manager;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.InjectMocks;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import ru.netology.domain.PurchaseItem;
 import ru.netology.layers.PosterManager;
 import ru.netology.layers.PosterRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.doReturn;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
+@ExtendWith(MockitoExtension.class)
+public class PosterManagerWithMockTest {
+    @Mock
+    private PosterRepository repository;
 
-public class PosterManagerTest {
-    private PosterRepository repository = new PosterRepository();
-    private PosterManager manager = new PosterManager(repository);
+    @InjectMocks
+    private PosterManager manager;
+
     private PurchaseItem film1 = new PurchaseItem(1, 101, "Операция Ы", "Комедия", "http1");
     private PurchaseItem film2 = new PurchaseItem(2, 102, "Король Лев", "мультфильм", "http2");
     private PurchaseItem film3 = new PurchaseItem(3, 103, "Карты, Деньги, Два ствола", "боевик", "http3");
@@ -33,109 +39,74 @@ public class PosterManagerTest {
     private PurchaseItem film14 = new PurchaseItem(14, 115, "Планета обезън", "фантастика", "http14");
 
 
-    @BeforeEach
-    public void manageAdd() {
-        manager.add(film1);
-        manager.add(film2);
-        manager.add(film3);
-        manager.add(film4);
-        manager.add(film5);
-        manager.add(film6);
-        manager.add(film7);
-    }
-
     @Test
     public void shouldGet10LastFilms() {
-        manager.add(film8);
-        manager.add(film9);
-        manager.add(film10);
-        manager.add(film11);
-        manager.add(film12);
-        manager.add(film13);
-        manager.add(film14);
+        PurchaseItem[] returned = new PurchaseItem[] {film14, film13, film12, film11, film10, film9, film8, film7, film6, film5, film4, film3};
+        doReturn(returned).when(repository).findAll();
+
         PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[]{film14, film13, film12, film11, film10, film9, film8, film7, film6, film5};
+        PurchaseItem[] expected = new PurchaseItem[] {film3, film4, film5, film6, film7, film8, film9, film10, film11, film12};
 
         assertArrayEquals(expected, actual);
+
+        verify(repository).findAll();
     }
 
     @Test
     public void shouldGetLastFilmsMoreDefault() {
+        PurchaseItem[] returned = new PurchaseItem[] {film2, film3, film4, film5, film6, film7, film8, film9, film10, film11, film12, film13, film14};
+        doReturn(returned).when(repository).findAll();
+
         manager.setLenCustom(12);
-        manager.add(film8);
-        manager.add(film9);
-        manager.add(film10);
-        manager.add(film11);
-        manager.add(film12);
-        manager.add(film13);
-        manager.add(film14);
+
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film14, film13, film12, film11, film10, film9, film8, film7, film6, film5, film4, film3};
 
         assertArrayEquals(expected, actual);
+
+        verify(repository).findAll();
     }
 
     @Test
     public void shouldGetLastFilmsLessDefault() {
+        PurchaseItem[] returned = new PurchaseItem[] {film1, film2, film3, film4, film5, film6, film7};
+        doReturn(returned).when(repository).findAll();
+
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3, film2, film1};
 
         assertArrayEquals(expected, actual);
-    }
 
+        verify(repository).findAll();
+    }
 
     @Test
     public void shouldGetLastFiveFilms() {
+        PurchaseItem[] returned = new PurchaseItem[] {film1, film2, film3, film4, film5, film6, film7};
+        doReturn(returned).when(repository).findAll();
+
         manager.setLenCustom(5);
+
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3};
 
         assertArrayEquals(expected, actual);
+
+        verify(repository).findAll();
     }
 
     @Test
-    public void shouldWhenLenMoreFilm() {
+    public void shouldWhenLenMoreFilms() {
+        PurchaseItem[] returned = new PurchaseItem[] {film1, film2, film3, film4, film5, film6, film7};
+        doReturn(returned).when(repository).findAll();
+
         manager.setLenCustom(10);
+
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3, film2, film1};
 
         assertArrayEquals(expected, actual);
-    }
 
-    @Test
-    public void shouldDeleteAll() {
-        repository.removeAll();
-        PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[0];
-
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldRemoveById() {
-        repository.removeById(1);
-        PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[] {film7, film6, film5, film4, film3, film2};
-
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindById() {
-        repository.findById(2);
-        PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[] {film2};
-
-        assertArrayEquals(expected, actual);
-    }
-
-    @Disabled
-    @Test
-    public void shouldRemoveByNonexistentId() {
-        repository.removeById(19);
-        PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[] {film1};
-
-        assertArrayEquals(expected, actual);
+        verify(repository).findAll();
     }
 }
