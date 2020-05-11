@@ -1,12 +1,15 @@
 package ru.netology.layers;
 
+import lombok.Data;
 import ru.netology.domain.PurchaseItem;
+import ru.netology.layers.PosterManager;
 
-import java.io.ObjectOutputStream;
-
+@Data
 public class PosterRepository {
     private PurchaseItem[] items = new PurchaseItem[0];
 
+    public PosterRepository() {
+    }
 
     public void add(PurchaseItem item) {
         int length = items.length + 1;

@@ -1,14 +1,13 @@
-package ru.netology.manager;
+package ru.netology.layers;
 
 import lombok.Data;
 import ru.netology.domain.PurchaseItem;
+import org.jetbrains.annotations.TestOnly;
 import ru.netology.layers.PosterRepository;
 
 @Data
 public class PosterManager {
     private PosterRepository repository;
-    private int defaultLength = 10;
-    private int lenCustom = 0;
 
     public PosterManager(PosterRepository repository) {
         this.repository = repository;
@@ -18,21 +17,8 @@ public class PosterManager {
         repository.add(item);
     }
 
-    public void removeById(int id) {
-        repository.removeById(id);
-    }
-
-    public void findAll() {
-        repository.findAll();
-    }
-
-    public void findById(int id) {
-        repository.findById(id);
-    }
-
-    public void removeAll() {
-        repository.removeAll();
-    }
+    private int defaultLength = 10;
+    private int lenCustom = 0;
 
     public int setLen() {
         PurchaseItem[] items = repository.findAll();
