@@ -1,9 +1,7 @@
 package ru.netology.manager;
 
-import lombok.Data;
 import ru.netology.domain.PurchaseItem;
 
-@Data
 public class PosterManager {
     private PurchaseItem[] items = new PurchaseItem[0];
     private int defaultLength = 10;
@@ -25,11 +23,11 @@ public class PosterManager {
         items = tmp;
     }
 
-    public int setLength(int itemSize) {
+    public int setLength(int itemsSize) {
         int len = defaultLength;
-        if (lenCustom <= 0 || lenCustom > itemSize) {
-            if (len > itemSize) {
-                len = itemSize;
+        if (lenCustom <= 0 || lenCustom > itemsSize) {
+            if (len > itemsSize) {
+                len = itemsSize;
             }
             return len;
         }
