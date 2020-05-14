@@ -4,10 +4,13 @@ import ru.netology.domain.PurchaseItem;
 import ru.netology.repository.PosterRepository;
 
 public class PosterManager {
-    private PosterRepository repository;
+    private PosterRepository repository = new PosterRepository();
 
     private int defaultLength = 10;
     private int lenCustom = 0;
+
+    public PosterManager() {
+    }
 
     public PosterManager(int lenCustom) {
         this.lenCustom = lenCustom;

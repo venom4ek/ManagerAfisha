@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 @ExtendWith(MockitoExtension.class)
 public class PosterManagerWithMockTest {
     @Mock
-    private PosterRepository repository;
+    private PosterRepository repository = new PosterRepository();
 
     @InjectMocks
-    private PosterManager manager;
+    private PosterManager manager = new PosterManager(repository);
 
     private PurchaseItem film1 = new PurchaseItem(1, 101, "Операция Ы", "Комедия", "http1");
     private PurchaseItem film2 = new PurchaseItem(2, 102, "Король Лев", "мультфильм", "http2");
