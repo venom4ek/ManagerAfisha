@@ -12,6 +12,10 @@ public class PosterManager {
     public PosterManager() {
     }
 
+    public PosterManager(int lenCustom) {
+        this.lenCustom = lenCustom;
+    }
+
     public void add(PurchaseItem item) {
         int length = items.length + 1;
         PurchaseItem[] tmp = new PurchaseItem[length];
@@ -21,11 +25,12 @@ public class PosterManager {
         items = tmp;
     }
 
-    public int setLen() {
+    public int setLength(int itemSize) {
+        lenCustom = this.lenCustom;
         int len = defaultLength;
-        if (lenCustom == 0 || lenCustom > items.length) {
-            if (len > items.length) {
-                len = items.length;
+        if (lenCustom <= 0 || lenCustom > itemSize) {
+            if (len > itemSize) {
+                len = itemSize;
             }
             return len;
         }
@@ -34,8 +39,9 @@ public class PosterManager {
     }
 
     public PurchaseItem[] getFilm() {
-        PurchaseItem[] result = new PurchaseItem[setLen()];
-        for (int i = 0; i < setLen(); i++) {
+        PurchaseItem[] result = new PurchaseItem[setLength(items.length)];
+        int resultSize = setLength(items.length);
+        for (int i = 0; i < resultSize; i++) {
             int index = items.length - i - 1;
             result[i] = items[index];
         }
