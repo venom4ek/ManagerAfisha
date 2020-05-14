@@ -51,8 +51,8 @@ public class PosterManagerTest {
 
     @Test
     public void shouldGetLastFilmsMoreDefault() {
-    //    PosterManager posterManager = new PosterManager(12);
-        manager.setLenCustom(12);
+        PosterManager posterManager = new PosterManager(12);
+   //     manager.setLenCustom(12);
         manager.add(film8);
         manager.add(film9);
         manager.add(film10);

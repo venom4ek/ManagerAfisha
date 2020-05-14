@@ -26,7 +26,6 @@ public class PosterManager {
     }
 
     public int setLength(int itemSize) {
-        lenCustom = this.lenCustom;
         int len = defaultLength;
         if (lenCustom <= 0 || lenCustom > itemSize) {
             if (len > itemSize) {
