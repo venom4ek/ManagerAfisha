@@ -1,7 +1,6 @@
 package ru.netology.manager;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.PurchaseItem;
 import ru.netology.repository.PosterRepository;
@@ -56,7 +55,14 @@ public class PosterManagerTest {
 
     @Test
     public void shouldGetLastFilmsMoreDefault() {
-        manager.setLenCustom(12);
+        PosterManager manager = new PosterManager(12);
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+        manager.add(film6);
+        manager.add(film7);
         manager.add(film8);
         manager.add(film9);
         manager.add(film10);
@@ -81,7 +87,14 @@ public class PosterManagerTest {
 
     @Test
     public void shouldGetLastFiveFilms() {
-        manager.setLenCustom(5);
+        PosterManager manager = new PosterManager(5);
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+        manager.add(film6);
+        manager.add(film7);
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3};
 
@@ -90,7 +103,14 @@ public class PosterManagerTest {
 
     @Test
     public void shouldWhenLenMoreFilm() {
-        manager.setLenCustom(10);
+        PosterManager manager = new PosterManager(10);
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+        manager.add(film6);
+        manager.add(film7);
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3, film2, film1};
 

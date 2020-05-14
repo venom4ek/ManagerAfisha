@@ -1,9 +1,7 @@
 package ru.netology.repository;
 
-import lombok.Data;
 import ru.netology.domain.PurchaseItem;
 
-@Data
 public class PosterRepository {
     private PurchaseItem[] items = new PurchaseItem[0];
 

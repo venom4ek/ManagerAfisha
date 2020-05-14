@@ -1,15 +1,17 @@
 package ru.netology.manager;
 
-import lombok.Data;
 import ru.netology.domain.PurchaseItem;
 import ru.netology.repository.PosterRepository;
 
-@Data
 public class PosterManager {
     private PosterRepository repository;
 
     private int defaultLength = 10;
     private int lenCustom = 0;
+
+    public PosterManager(int lenCustom) {
+        this.lenCustom = lenCustom;
+    }
 
     public PosterManager(PosterRepository repository) {
         this.repository = repository;
