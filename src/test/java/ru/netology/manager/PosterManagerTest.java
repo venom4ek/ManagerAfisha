@@ -112,4 +112,37 @@ public class PosterManagerTest {
 
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldWhenLenZeroCountFilm() {
+        PosterManager manager = new PosterManager(0);
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+        manager.add(film6);
+        manager.add(film7);
+        manager.add(film8);
+        PurchaseItem[] actual = manager.getFilm();
+        PurchaseItem[] expected = new PurchaseItem[]{film8, film7, film6, film5, film4, film3, film2, film1};
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldWhenLenNegativeCountFilm() {
+        PosterManager manager = new PosterManager(-2);
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+        manager.add(film6);
+        manager.add(film7);
+        PurchaseItem[] actual = manager.getFilm();
+        PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3, film2, film1};
+
+        assertArrayEquals(expected, actual);
+    }
 }
