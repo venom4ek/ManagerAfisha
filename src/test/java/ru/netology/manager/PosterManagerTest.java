@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PosterManagerTest {
     private PosterRepository repository = new PosterRepository();
-    private PosterManager manager = new PosterManager(repository);
+    private PosterManager manager = new PosterManager();
     private PurchaseItem film1 = new PurchaseItem(1, 101, "Операция Ы", "Комедия", "http1");
     private PurchaseItem film2 = new PurchaseItem(2, 102, "Король Лев", "мультфильм", "http2");
     private PurchaseItem film3 = new PurchaseItem(3, 103, "Карты, Деньги, Два ствола", "боевик", "http3");
@@ -28,6 +28,7 @@ public class PosterManagerTest {
 
 
     @BeforeEach
+    @Test
     public void manageAdd() {
         manager.add(film1);
         manager.add(film2);
