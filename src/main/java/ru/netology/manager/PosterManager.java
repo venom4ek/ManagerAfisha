@@ -1,13 +1,15 @@
-package ru.netology.layers;
+package ru.netology.manager;
 
 import lombok.Data;
 import ru.netology.domain.PurchaseItem;
-import org.jetbrains.annotations.TestOnly;
-import ru.netology.layers.PosterRepository;
+import ru.netology.repository.PosterRepository;
 
 @Data
 public class PosterManager {
     private PosterRepository repository;
+
+    private int defaultLength = 10;
+    private int lenCustom = 0;
 
     public PosterManager(PosterRepository repository) {
         this.repository = repository;
@@ -16,9 +18,6 @@ public class PosterManager {
     public void add(PurchaseItem item) {
         repository.add(item);
     }
-
-    private int defaultLength = 10;
-    private int lenCustom = 0;
 
     public int setLength(int itemsSize) {
         int len = defaultLength;

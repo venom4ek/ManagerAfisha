@@ -1,15 +1,11 @@
-package ru.netology.layers;
+package ru.netology.repository;
 
 import lombok.Data;
 import ru.netology.domain.PurchaseItem;
-import ru.netology.layers.PosterManager;
 
 @Data
 public class PosterRepository {
     private PurchaseItem[] items = new PurchaseItem[0];
-
-    public PosterRepository() {
-    }
 
     public void add(PurchaseItem item) {
         int length = items.length + 1;
@@ -24,7 +20,7 @@ public class PosterRepository {
         return items;
     }
 
-    public void removeById(int id) {
+        public void removeById ( int id){
         int length = items.length - 1;
         PurchaseItem[] tmp = new PurchaseItem[length];
         int index = 0;
@@ -37,7 +33,8 @@ public class PosterRepository {
         items = tmp;
     }
 
-    public void findById(int id) {
+
+    public PurchaseItem[] findById(int id) {
         int index = 0;
         PurchaseItem[] tmp = new PurchaseItem[1];
         for (PurchaseItem item : items) {
@@ -46,6 +43,7 @@ public class PosterRepository {
             }
         }
         items = tmp;
+        return items;
     }
 
     public void removeAll() {

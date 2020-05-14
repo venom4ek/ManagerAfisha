@@ -3,13 +3,11 @@ package ru.netology.manager;
 import org.mockito.Mock;
 import org.mockito.InjectMocks;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import ru.netology.domain.PurchaseItem;
-import ru.netology.layers.PosterManager;
-import ru.netology.layers.PosterRepository;
+import ru.netology.repository.PosterRepository;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.doReturn;

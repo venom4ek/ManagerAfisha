@@ -3,13 +3,8 @@ package ru.netology.manager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import ru.netology.domain.PurchaseItem;
-import ru.netology.layers.PosterManager;
-import ru.netology.layers.PosterRepository;
+import ru.netology.repository.PosterRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -129,12 +124,22 @@ public class PosterManagerTest {
         assertArrayEquals(expected, actual);
     }
 
-    @Disabled
+    @Test
+    public void shouldFindByNonexistentId() {
+        repository.findById(28);
+        PurchaseItem[] actual = manager.getFilm();
+        PurchaseItem[] expected = new PurchaseItem[] {null};
+
+        assertArrayEquals(expected, actual);
+    }
+
     @Test
     public void shouldRemoveByNonexistentId() {
-        repository.removeById(19);
-        PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[] {film1};
+        try {
+            repository.removeById(19);
+        } catch (ArrayIndexOutOfBoundsException e) {}
+            PurchaseItem[] actual = manager.getFilm();
+            PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3, film2, film1};
 
         assertArrayEquals(expected, actual);
     }
