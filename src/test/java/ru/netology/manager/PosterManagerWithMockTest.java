@@ -55,7 +55,7 @@ public class PosterManagerWithMockTest {
         PurchaseItem[] returned = new PurchaseItem[] {film2, film3, film4, film5, film6, film7, film8, film9, film10, film11, film12, film13, film14};
         doReturn(returned).when(repository).findAll();
 
-        PosterManager manager = new PosterManager(12);
+        PosterManager manager = new PosterManager(repository, 12);
 
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film14, film13, film12, film11, film10, film9, film8, film7, film6, film5, film4, film3};
@@ -83,7 +83,7 @@ public class PosterManagerWithMockTest {
         PurchaseItem[] returned = new PurchaseItem[] {film1, film2, film3, film4, film5, film6, film7};
         doReturn(returned).when(repository).findAll();
 
-        PosterManager manager = new PosterManager(5);
+        PosterManager manager = new PosterManager(repository,5);
 
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3};
@@ -98,7 +98,7 @@ public class PosterManagerWithMockTest {
         PurchaseItem[] returned = new PurchaseItem[] {film1, film2, film3, film4, film5, film6, film7};
         doReturn(returned).when(repository).findAll();
 
-        PosterManager manager = new PosterManager(10);
+        PosterManager manager = new PosterManager(repository, 12);
 
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3, film2, film1};

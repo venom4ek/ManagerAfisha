@@ -9,15 +9,17 @@ public class PosterManager {
     private int defaultLength = 10;
     private int lenCustom = 0;
 
-    public PosterManager() {
-    }
-
     public PosterManager(int lenCustom) {
         this.lenCustom = lenCustom;
     }
 
     public PosterManager(PosterRepository repository) {
         this.repository = repository;
+    }
+
+    public PosterManager(PosterRepository repository, int lenCustom) {
+        this.repository = repository;
+        this.lenCustom = lenCustom;
     }
 
     public void add(PurchaseItem item) {
@@ -40,7 +42,7 @@ public class PosterManager {
         PurchaseItem[] items = repository.findAll();
         int resultSize = setLength(items.length);
         PurchaseItem[] result = new PurchaseItem[resultSize];
-        for (int i = 0; i < resultSize; i++) {
+         for (int i = 0; i < resultSize; i++) {
             int index = items.length - i - 1;
             result[i] = items[index];
         }

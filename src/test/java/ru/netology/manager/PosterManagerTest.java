@@ -56,7 +56,7 @@ public class PosterManagerTest {
 
     @Test
     public void shouldGetLastFilmsMoreDefault() {
-        PosterManager manager = new PosterManager(12);
+        PosterManager manager = new PosterManager(repository,12);
         manager.add(film1);
         manager.add(film2);
         manager.add(film3);
