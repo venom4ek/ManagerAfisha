@@ -56,14 +56,7 @@ public class PosterManagerTest {
 
     @Test
     public void shouldGetLastFilmsMoreDefault() {
-        PosterManager manager = new PosterManager(repository,12);
-        manager.add(film1);
-        manager.add(film2);
-        manager.add(film3);
-        manager.add(film4);
-        manager.add(film5);
-        manager.add(film6);
-        manager.add(film7);
+        PosterManager manager = new PosterManager(repository, 12);
         manager.add(film8);
         manager.add(film9);
         manager.add(film10);
@@ -88,14 +81,7 @@ public class PosterManagerTest {
 
     @Test
     public void shouldGetLastFiveFilms() {
-        PosterManager manager = new PosterManager(5);
-        manager.add(film1);
-        manager.add(film2);
-        manager.add(film3);
-        manager.add(film4);
-        manager.add(film5);
-        manager.add(film6);
-        manager.add(film7);
+        PosterManager manager = new PosterManager(repository, 5);
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3};
 
@@ -104,14 +90,7 @@ public class PosterManagerTest {
 
     @Test
     public void shouldWhenLenMoreFilm() {
-        PosterManager manager = new PosterManager(10);
-        manager.add(film1);
-        manager.add(film2);
-        manager.add(film3);
-        manager.add(film4);
-        manager.add(film5);
-        manager.add(film6);
-        manager.add(film7);
+        PosterManager manager = new PosterManager(repository, 10);
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3, film2, film1};
 
@@ -131,7 +110,7 @@ public class PosterManagerTest {
     public void shouldRemoveById() {
         repository.removeById(1);
         PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[] {film7, film6, film5, film4, film3, film2};
+        PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3, film2};
 
         assertArrayEquals(expected, actual);
     }
@@ -140,7 +119,7 @@ public class PosterManagerTest {
     public void shouldFindById() {
         repository.findById(2);
         PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[] {film2};
+        PurchaseItem[] expected = new PurchaseItem[]{film2};
 
         assertArrayEquals(expected, actual);
     }
@@ -149,18 +128,16 @@ public class PosterManagerTest {
     public void shouldFindByNonexistentId() {
         repository.findById(28);
         PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[] {null};
+        PurchaseItem[] expected = new PurchaseItem[]{null};
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldRemoveByNonexistentId() {
-        try {
-            repository.removeById(19);
-        } catch (ArrayIndexOutOfBoundsException e) {}
-            PurchaseItem[] actual = manager.getFilm();
-            PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3, film2, film1};
+        repository.removeById(19);
+        PurchaseItem[] actual = manager.getFilm();
+        PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3, film2, film1};
 
         assertArrayEquals(expected, actual);
     }

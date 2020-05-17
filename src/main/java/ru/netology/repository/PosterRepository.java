@@ -18,7 +18,7 @@ public class PosterRepository {
         return items;
     }
 
-        public void removeById ( int id){
+    public void removeById(int id) {
         int length = items.length - 1;
         PurchaseItem[] tmp = new PurchaseItem[length];
         int index = 0;
@@ -32,7 +32,7 @@ public class PosterRepository {
     }
 
 
-    public PurchaseItem[] findById(int id) {
+    public PurchaseItem findById(int id) {
         int index = 0;
         PurchaseItem[] tmp = new PurchaseItem[1];
         for (PurchaseItem item : items) {
@@ -41,7 +41,7 @@ public class PosterRepository {
             }
         }
         items = tmp;
-        return items;
+        return tmp[index];
     }
 
     public void removeAll() {

@@ -39,11 +39,11 @@ public class PosterManagerWithMockTest {
 
     @Test
     public void shouldGet10LastFilms() {
-        PurchaseItem[] returned = new PurchaseItem[] {film14, film13, film12, film11, film10, film9, film8, film7, film6, film5, film4, film3};
+        PurchaseItem[] returned = new PurchaseItem[]{film14, film13, film12, film11, film10, film9, film8, film7, film6, film5, film4, film3};
         doReturn(returned).when(repository).findAll();
 
         PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[] {film3, film4, film5, film6, film7, film8, film9, film10, film11, film12};
+        PurchaseItem[] expected = new PurchaseItem[]{film3, film4, film5, film6, film7, film8, film9, film10, film11, film12};
 
         assertArrayEquals(expected, actual);
 
@@ -52,7 +52,7 @@ public class PosterManagerWithMockTest {
 
     @Test
     public void shouldGetLastFilmsMoreDefault() {
-        PurchaseItem[] returned = new PurchaseItem[] {film2, film3, film4, film5, film6, film7, film8, film9, film10, film11, film12, film13, film14};
+        PurchaseItem[] returned = new PurchaseItem[]{film2, film3, film4, film5, film6, film7, film8, film9, film10, film11, film12, film13, film14};
         doReturn(returned).when(repository).findAll();
 
         PosterManager manager = new PosterManager(repository, 12);
@@ -67,7 +67,7 @@ public class PosterManagerWithMockTest {
 
     @Test
     public void shouldGetLastFilmsLessDefault() {
-        PurchaseItem[] returned = new PurchaseItem[] {film1, film2, film3, film4, film5, film6, film7};
+        PurchaseItem[] returned = new PurchaseItem[]{film1, film2, film3, film4, film5, film6, film7};
         doReturn(returned).when(repository).findAll();
 
         PurchaseItem[] actual = manager.getFilm();
@@ -80,10 +80,10 @@ public class PosterManagerWithMockTest {
 
     @Test
     public void shouldGetLastFiveFilms() {
-        PurchaseItem[] returned = new PurchaseItem[] {film1, film2, film3, film4, film5, film6, film7};
+        PurchaseItem[] returned = new PurchaseItem[]{film1, film2, film3, film4, film5, film6, film7};
         doReturn(returned).when(repository).findAll();
 
-        PosterManager manager = new PosterManager(repository,5);
+        PosterManager manager = new PosterManager(repository, 5);
 
         PurchaseItem[] actual = manager.getFilm();
         PurchaseItem[] expected = new PurchaseItem[]{film7, film6, film5, film4, film3};
@@ -95,7 +95,7 @@ public class PosterManagerWithMockTest {
 
     @Test
     public void shouldWhenLenMoreFilms() {
-        PurchaseItem[] returned = new PurchaseItem[] {film1, film2, film3, film4, film5, film6, film7};
+        PurchaseItem[] returned = new PurchaseItem[]{film1, film2, film3, film4, film5, film6, film7};
         doReturn(returned).when(repository).findAll();
 
         PosterManager manager = new PosterManager(repository, 12);
