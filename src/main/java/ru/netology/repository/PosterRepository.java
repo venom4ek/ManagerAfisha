@@ -33,15 +33,12 @@ public class PosterRepository {
 
 
     public PurchaseItem findById(int id) {
-        int index = 0;
-        PurchaseItem[] tmp = new PurchaseItem[1];
         for (PurchaseItem item : items) {
             if (item.getId() == id) {
-                tmp[index] = item;
+                return item;
             }
         }
-        items = tmp;
-        return tmp[index];
+        return null;
     }
 
     public void removeAll() {

@@ -117,20 +117,14 @@ public class PosterManagerTest {
 
     @Test
     public void shouldFindById() {
-        repository.findById(2);
-        PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[]{film2};
+        PurchaseItem actual = repository.findById(2);
 
-        assertArrayEquals(expected, actual);
+        assertEquals(film2, actual);
     }
 
     @Test
     public void shouldFindByNonexistentId() {
-        repository.findById(28);
-        PurchaseItem[] actual = manager.getFilm();
-        PurchaseItem[] expected = new PurchaseItem[]{null};
-
-        assertArrayEquals(expected, actual);
+        assertNull(repository.findById(28));
     }
 
     @Test
